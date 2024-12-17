@@ -1,5 +1,5 @@
 <template>
-    <div class="h-[90vh] bg-black flex flex-col justify-center items-center text-white gap-4">
+    <div class="h-[90vh] bg-[url(./hero-background.png)] flex flex-col justify-center items-center text-white gap-4">
         <h1 class="max-w-[40rem] text-[60px] text-center font-bold leading-[4rem]">
             Igniting <span>Innovation</span> and Empowering <span>Futures</span>
         </h1>
@@ -16,3 +16,4 @@
         text-decoration-thickness: .2rem;
     }
 </style>
+
