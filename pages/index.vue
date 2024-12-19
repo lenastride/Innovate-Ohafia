@@ -3,5 +3,6 @@
         <Header />
         <Hero />
         <Partners />
+        <Achievement />
     </div>
 </template>

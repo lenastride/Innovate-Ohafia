@@ -1,17 +1,19 @@
 <template>
-    <div class="bg-[#FF2E2E] w-full max-w-[57rem] px-8 py-10 flex justify-center items-center absolute -bottom-16">
-        <section class="px-10 border-r text-center">
+    <div class="bg-white w-full max-w-[60rem] px-8 py-10 flex justify-center items-center text-black absolute -bottom-16 shadow-2xl">
+        <section class="px-10 border-r border-[#FF0000] text-center z-10">
             <p>DATE</p>
             <h1>14th Oct. 2025</h1>
         </section>
-        <section class="px-10 border-r text-center">
+        <section class="px-10 border-r border-[#FF0000] text-center z-10">
             <p>TIME</p>
             <h1>9:00AM</h1>
         </section>
-        <section class="px-10 text-center">
+        <section class="px-10 text-center z-10">
             <p>VENUE</p>
             <h1>Ohafia, Rivers State</h1>
         </section>
+            <img src="/details-1.svg" class="absolute right-0 bottom-0" alt="">
+            <img src="/details-2.svg" class="absolute h-full left-0 bottom-0" alt="">
     </div>
 </template>
 
