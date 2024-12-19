@@ -3,9 +3,9 @@
        <div class="w-full flex  justify-center items-center">
           <Logo />
           <nav class="flex justify-center gap-12 w-full">
-             <NuxtLink href="#" class="active">Home</NuxtLink>
-             <NuxtLink href="about">About</NuxtLink>
-             <NuxtLink href="contact">Contact</NuxtLink>
+             <NuxtLink to="/" class="active">Home</NuxtLink>
+             <NuxtLink to="about">About</NuxtLink>
+             <NuxtLink to="contact">Contact</NuxtLink>
           </nav>
           <section class="flex items-center justify-end w-full gap-12">
              <NuxtLink href="#" class="text-[#D90000]">Get Tickets</NuxtLink>
