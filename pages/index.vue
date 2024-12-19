@@ -1,6 +1,5 @@
 <template>
     <div>
-        <Header />
         <Hero />
         <Partners />
         <Achievement />
