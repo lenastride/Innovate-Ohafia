@@ -3,5 +3,6 @@
         <Hero />
         <Partners />
         <Achievement />
+        <WhyAttend />
     </div>
 </template>
