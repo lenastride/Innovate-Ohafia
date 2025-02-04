@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white w-full max-w-[60rem] px-8 py-10 flex justify-center items-center text-black absolute -bottom-16 shadow-2xl">
+    <div class="bg-white w-full max-w-[60rem] hidden md:flex px-8 py-10 justify-center items-center text-black absolute -bottom-16 shadow-2xl">
         <section class="px-10 border-r border-[#FF0000] text-center z-10">
             <p>DATE</p>
             <h1>14th Oct. 2025</h1>
