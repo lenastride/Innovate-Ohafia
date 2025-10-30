@@ -1,3 +1,23 @@
+<script setup lang="ts">
+useSeoMeta({
+  title: 'About - Empowering Ohafia Through Technology',
+  description: 'Join Innovate Ohafia in transforming our community through technology education, innovation hubs, and youth empowerment programs.',
+  ogTitle: 'Innovate Ohafia - Home',
+  ogDescription: 'Join Innovate Ohafia in transforming our community through technology education and youth empowerment.',
+  ogImage: '/og-image.jpg',
+  ogUrl: 'https://innovateohafia.com',
+  twitterTitle: 'Innovate Ohafia - Home',
+  twitterDescription: 'Transforming Ohafia through technology and innovation.',
+  twitterImage: '/og-image.jpg'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://innovateohafia.com' }
+  ]
+})
+</script>
+
 <template>
   <header
     class="h-[90vh] px-[1.5em] md:px-[1em] flex flex-cols justify-center bg-[url(./about_page_mobile_hero.png)] md:bg-[url(./about_page_hero.png)] bg-no-repeat bg-cover bg-position[center bottom] items-center gap-4"
