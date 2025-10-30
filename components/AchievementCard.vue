@@ -1,16 +1,57 @@
+<!-- components/AchievementCard.vue -->
 <script setup>
-    defineProps({
-        title: String,
-        description: String
-    })
+defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  imageAlt: {
+    type: String,
+    default: ''
+  }
+})
 </script>
 
 <template>
-    <div class="w-full min-w-[19rem] p-4 border border-[#FF0000]">
-       <section class="relative">
-        <img src="/achievement-1.png" alt=""v>
-        <p class="bg-white px-4 py-2 text-[#FF0000] text-xl font-bold absolute bottom-2">{{ title }}</p>
-       </section>
-       <p class="pt-4">{{ description }}</p>
+  <article 
+    class="achievement-card group flex-shrink-0 w-80 bg-white  shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-103 border border-[#FF0000] p-2"
+    aria-labelledby="card-title"
+  >
+    <!-- Image Section -->
+    <div class="relative h-[18em] bg-gray-200 overflow-hidden">
+      <img 
+        :src="image" 
+        :alt="imageAlt || title"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 -z-5"
+      />
+      <h3 
+        id="card-title"
+        class="absolute -bottom-[0.1em] -left-2 px-5 bg-white items-baseline py-1 text-xl font-bold mb-3  text-[#D90000] z-10 "
+      >
+        {{ title }}
+      </h3>
     </div>
+    
+    <!-- Content Section -->
+    <div class="p-4">
+      
+      <p class="text-gray-600 leading-relaxed text-sm">
+        {{ description }}
+      </p>
+    </div>
+  </article>
 </template>
+
+<style scoped>
+.achievement-card {
+  scroll-snap-align: start;
+}
+</style>
