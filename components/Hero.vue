@@ -1,9 +1,9 @@
 <template>
   <div
-    class="h-[90vh] px-[1em] bg-[url(./hero-background.png)] bg-cover bg-no-repeat flex flex-col justify-center items-center text-white gap-4"
+    class="h-[90vh] px-[1em] bg-[url(./hero-background_920.png)] bg-cover bg-no-repeat flex flex-col justify-center items-center text-white gap-4"
   >
     <h1
-      class="max-w-[40rem] text-[2rem] md:text-[60px] text-center font-bold leading-[1.6em] md:leading-[1.3em]"
+      class="max-w-[40rem] text-[2rem] md:text-[60px] text-center font-bold leading-[1.6em] md:leading-[1.3em] drop-shadow-md"
     >
       Igniting <span>Innovation</span> and Empowering <span>Futures</span>
     </h1>
@@ -14,7 +14,7 @@
         >Ohafia</span
       >.
     </p>
-    <ProgrammeDetails />
+    <!-- <ProgrammeDetails /> -->
   </div>
 </template>
 
