@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'About - Empowering Ohafia Through Technology',
+  title: 'About - Innovate Ohafia',
   description: 'Join Innovate Ohafia in transforming our community through technology education, innovation hubs, and youth empowerment programs.',
   ogTitle: 'Innovate Ohafia - Home',
   ogDescription: 'Join Innovate Ohafia in transforming our community through technology education and youth empowerment.',
