@@ -1,0 +1,108 @@
+{
+    "name": "Innovate Ohafia - Igniting Innovation and Empowering Futures",
+    "short_name": "InnovateOhafia",
+    "description": "Igniting youths with a passion for technology and fostering economic development in Ohafia community.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#004873",
+    "theme_color": "#004873",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["education", "technology", "nonprofit"],
+    "icons": [
+      {
+        "src": "/favicon-16x16.png",
+        "sizes": "16x16",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/favicon-32x32.png",
+        "sizes": "32x32",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/android-chrome-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/apple-touch-icon.png",
+        "sizes": "180x180",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/maskable-icon.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+      }
+    ],
+    "screenshots": [
+      {
+        "src": "/screenshot-mobile.png",
+        "sizes": "390x844",
+        "type": "image/png",
+        "form_factor": "narrow",
+        "label": "Innovate Ohafia mobile homepage"
+      },
+      {
+        "src": "/og-image.jpg",
+        "sizes": "1920x1080",
+        "type": "image/png",
+        "form_factor": "wide",
+        "label": "Innovate Ohafia desktop homepage"
+      }
+    ],
+    "shortcuts": [
+      {
+        "name": "About Us",
+        "short_name": "About",
+        "description": "Learn about our mission and vision",
+        "url": "/about",
+        "icons": [
+          {
+            "src": "/icon_96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+          }
+        ]
+      },
+      {
+        "name": "Contact",
+        "short_name": "Contact",
+        "description": "Get in touch with us",
+        "url": "/contact",
+        "icons": [
+          {
+            "src": "/icon_96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+          }
+        ]
+      },
+      {
+        "name": "Events",
+        "short_name": "Events",
+        "description": "View upcoming events and programs",
+        "url": "/events",
+        "icons": [
+          {
+            "src": "/icon_96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+          }
+        ]
+      }
+    ]
+  }
