@@ -42,15 +42,11 @@ onUnmounted(() => {
   <header class="header" role="banner">
     <div class="header__container">
       <!-- Logo -->
-      <NuxtLink 
-        to="/" 
-        class="header__logo"
-        aria-label="Go to home page"
-      >
+      <NuxtLink to="/" class="header__logo" aria-label="Go to home page">
         <slot name="logo">
-            <span class="py-2 block">
-                        <HeaderLogo/>
-                    </span>
+          <span class="py-2 block">
+            <HeaderLogo />
+          </span>
         </slot>
       </NuxtLink>
 
@@ -73,7 +69,7 @@ onUnmounted(() => {
         <NuxtLink to="/tickets" class="tickets-link"> Get Tickets </NuxtLink>
 
         <!-- Donate Button -->
-        <button class="donate-btn ">Donate</button>
+        <button class="donate-btn">Donate</button>
 
         <!-- Mobile Menu Toggle -->
         <button
@@ -138,7 +134,6 @@ onUnmounted(() => {
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              
             >
               <path
                 d="M5.25 11.25H20.25C20.4489 11.25 20.6397 11.329 20.7803 11.4697C20.921 11.6103 21 11.8011 21 12C21 12.1989 20.921 12.3897 20.7803 12.5303C20.6397 12.671 20.4489 12.75 20.25 12.75H5.25C5.05109 12.75 4.86032 12.671 4.71967 12.5303C4.57902 12.3897 4.5 12.1989 4.5 12C4.5 11.8011 4.57902 11.6103 4.71967 11.4697C4.86032 11.329 5.05109 11.25 5.25 11.25Z"
@@ -187,7 +182,7 @@ onUnmounted(() => {
 <style scoped>
 /* Base Header Styles */
 .header {
-  @apply bg-white px-3 py-4 md:px-32 md:py-4 flex items-center justify-center sticky top-0 z-50 shadow-sm;
+  @apply bg-white px-3 py-4 2xl:px-32 md:px-[3em] md:py-4 flex items-center justify-center sticky top-0 z-50 shadow-sm;
 }
 
 .header__container {
@@ -288,7 +283,7 @@ onUnmounted(() => {
 
 /* Mobile Menu Header with Back Arrow */
 .mobile-menu__header {
-  @apply  pb-0 mb-0;
+  @apply pb-0 mb-0;
 }
 
 .mobile-menu__back-btn {
