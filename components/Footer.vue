@@ -8,7 +8,7 @@ const ccEmail = "lenastride@gmail.com";
 
 <template>
   <footer
-    class="bg-[#004873] w-full px-3 md:px-32 md:py-4 pt-5 items-center flex flex-col gap-3"
+    class="bg-[#004873] w-full px-3 2xl:px-32 md:px-[3em] md:py-4 pt-5 items-center flex flex-col gap-3"
   >
     <div class="w-full flex md:flex-row flex-col justify-center py-7">
       <div
@@ -18,13 +18,13 @@ const ccEmail = "lenastride@gmail.com";
           <span class="pb-8 block">
             <FooterLogo />
           </span>
-          <p class="pb-10 max-w-[25em]">
+          <p class="pb-10 2xl:max-w-[25em] md:max-w-[18em]">
             Igniting youths with a passion for technology and fostering economic
             development in Ohafia.
           </p>
         </div>
         <div
-          class="flex items-start justify-between md:justify-end w-full md:gap-40"
+          class="flex items-start justify-between md:justify-end w-full 2xl:gap-40 md:gap-20"
         >
           <div class="text-sm leading-8">
             <h1 class="font-bold text-x1 text-white pb-3">Services</h1>
