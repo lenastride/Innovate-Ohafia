@@ -103,7 +103,7 @@ onUnmounted(() => {
       <div
         class="w-full 2xl:p-[5em] md:p-[2em] 2xl:pl-[7em] md:pl-[2em] bg-cover md:bg-[url(/who_to_expect_bg.png)] g-[url(/innovate_patter.png)] h-[34em] overflow-y-auto custom-scrollbar flex 2xl:items-center md:items-center"
       >
-        <div class="w-full">
+        <div class="w-full 2xl:px-0 md:px-10 px-10">
           <div
             v-for="(activity, index) in obj.activities"
             :key="index"
