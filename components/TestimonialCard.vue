@@ -28,7 +28,7 @@ const handleClick = () => {
         'relative flex flex-col items-center text-center p-6  shadow-lg border-2 transition-all duration-300 min-h-[16em] w-full py-3',
         isActive
           ? 'bg-[#0072B5] w-full scale-105  text-white border-[#0072B5]'
-          : 'bg-white md:w-[18em] text-gray-700 border-0 shadow-none'
+          : 'bg-white 2xl:w-[18em] md:w-full text-gray-700 border-0 shadow-none'
       ]"
     >
       <!-- Avatar - Only shown when active -->

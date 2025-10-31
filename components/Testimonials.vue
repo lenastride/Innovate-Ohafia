@@ -63,11 +63,11 @@ watch(activeIndex, () => {
 </script>
 
 <template>
-  <main class="py-[3em] md:px-[10em]">
+  <main class="2xl:py-[3em] 2xl:px-[10em] md:px-[3em]">
     <section class="w-full flex justify-center">
-      <div class="max-w-[90em] w-full">
+      <div class="max-w-[90em] w-full md:pl-[6em]">
         <h1
-          class="font-bold text-2xl max-w-[10em] md:max-w-full md:text-3xl text-[#D90000] ml-[6.3%] md:ml-0 text-left"
+          class="font-bold text-2xl max-w-[10em] 2xl:max-w-full md:text-3xl text-[#D90000] ml-[6.3%] md:ml-0 text-left "
         >
           what do people say about us?
         </h1>
