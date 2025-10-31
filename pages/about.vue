@@ -50,7 +50,7 @@ useHead({
     </div>
   </header>
   <Partners />
-  <Speakers />
+  <!-- <Speakers /> -->
   <Testimonials />
   <JoinCommunity />
 </template>
