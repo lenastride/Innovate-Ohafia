@@ -5,7 +5,7 @@ useSeoMeta({
   ogTitle: 'Innovate Ohafia - Home',
   ogDescription: 'Join Innovate Ohafia in transforming our community through technology education and youth empowerment.',
   ogImage: '/og-image.jpg',
-  ogUrl: 'https://innovateohafia.com',
+  ogUrl: 'https://www.innovateohafia.com',
   twitterTitle: 'Innovate Ohafia - Home',
   twitterDescription: 'Transforming Ohafia through technology and innovation.',
   twitterImage: '/og-image.jpg'
@@ -13,7 +13,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://innovateohafia.com' }
+    { rel: 'canonical', href: 'https://www.innovateohafia.com' }
   ]
 })
 </script>
