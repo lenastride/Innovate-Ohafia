@@ -10,7 +10,13 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://innovateohafia.com'
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.innovateohafia.com'
+    }
+  },
+  // Nitro configuration for sitemap
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml']
     }
   },
   app: {
@@ -27,14 +33,18 @@ export default defineNuxtConfig({
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'Innovate Ohafia - Igniting Youth Passion for Technology' },
         { property: 'og:description', content: 'Igniting youths with a passion for technology and fostering economic development in Ohafia.' },
-        { property: 'og:image', content: '/og-image.jpg' },
-        { property: 'og:url', content: 'https://innovateohafia.com' },
+        { property: 'og:image', content: 'https://www.innovateohafia.com/og-image.jpg' },
+        { property: 'og:url', content: 'https://www.innovateohafia.com' },
         { property: 'og:site_name', content: 'Innovate Ohafia' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:type', content: 'image/jpeg' },
+        { property: 'og:image:alt', content: 'Innovate Ohafia - Igniting Innovation and Empowering Futures' },
         // Twitter Card
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Innovate Ohafia - Igniting Youth Passion for Technology' },
         { name: 'twitter:description', content: 'Igniting youths with a passion for technology and fostering economic development in Ohafia.' },
-        { name: 'twitter:image', content: '/twitter-image.jpg' },
+        { name: 'twitter:image', content: 'https://www.innovateohafia.com/og-image.jpg' },
         { name: 'twitter:site', content: '@innovateohafia' },
         { name: 'twitter:creator', content: '@innovateohafia' }
       ],
@@ -44,7 +54,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'manifest', href: '/site.webmanifest' },
-        { rel: 'canonical', href: 'https://innovateohafia.com' }
+        { rel: 'canonical', href: 'https://www.innovateohafia.com' }
       ],
       script: [
         {
@@ -53,8 +63,8 @@ export default defineNuxtConfig({
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Innovate Ohafia",
-            "url": "https://innovateohafia.com",
-            "logo": "https://innovateohafia.com/innovate_ohafia_logo_colored.svg",
+            "url": "https://www.innovateohafia.com",
+            "logo": "https://www.innovateohafia.com/innovate_ohafia_logo_colored.svg",
             "description": "Igniting youths with a passion for technology and fostering economic development in Ohafia.",
             "address": {
               "@type": "PostalAddress",
