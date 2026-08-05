@@ -9,34 +9,26 @@ const {
   prevTestimony 
 } = useTestimonialCarousel();
 
-// Auto-rotation
-const interval = ref<NodeJS.Timeout>();
+const AUTO_ROTATE_DELAY = 5000;
+let interval: ReturnType<typeof setInterval> | undefined;
 const mobileContainer = ref<HTMLElement>();
 
-onMounted(() => {
-  interval.value = setInterval(() => {
-    nextTestimony();
-    scrollToActiveCard();
-  }, 5000);
-});
+const stopAutoRotate = () => {
+  if (interval) clearInterval(interval);
+  interval = undefined;
+};
 
-onUnmounted(() => {
-  if (interval.value) {
-    clearInterval(interval.value);
-  }
-});
+const startAutoRotate = () => {
+  stopAutoRotate();
+  interval = setInterval(nextTestimony, AUTO_ROTATE_DELAY);
+};
 
 const pauseAutoRotate = () => {
-  if (interval.value) {
-    clearInterval(interval.value);
-  }
+  stopAutoRotate();
 };
 
 const resumeAutoRotate = () => {
-  interval.value = setInterval(() => {
-    nextTestimony();
-    scrollToActiveCard();
-  }, 5000);
+  startAutoRotate();
 };
 
 // Scroll to active card on mobile
@@ -60,6 +52,26 @@ watch(activeIndex, () => {
     scrollToActiveCard();
   });
 });
+
+const desktopOffset = (index: number) => {
+  const total = testimonies.value.length;
+  const distance = (index - activeIndex.value + total) % total;
+  return distance === total - 1 ? -1 : distance;
+};
+
+const desktopCardStyle = (index: number) => {
+  const offset = desktopOffset(index);
+  const isActive = offset === 0;
+
+  return {
+    opacity: isActive ? '1' : '0.72',
+    transform: `translateX(calc(-50% + ${offset * 120}%)) scale(${isActive ? 1.05 : 1})`,
+    zIndex: isActive ? 2 : 1,
+  };
+};
+
+onMounted(startAutoRotate);
+onUnmounted(stopAutoRotate);
 </script>
 
 <template>
@@ -78,6 +90,8 @@ watch(activeIndex, () => {
       class="flex flex-col items-center justify-center px-4 md:px-8"
       @mouseenter="pauseAutoRotate"
       @mouseleave="resumeAutoRotate"
+      @focusin="pauseAutoRotate"
+      @focusout="resumeAutoRotate"
     >
       <div class="relative w-full ">
         <!-- Navigation Buttons -->
@@ -112,8 +126,8 @@ watch(activeIndex, () => {
             <div
               v-for="(testimony, index) in testimonies"
               :key="index"
-              class="snap-center flex-shrink-0 transition-all duration-300"
-              :class="index === activeIndex ? 'w-[85vw] max-w-[320px]' : 'w-[70vw] max-w-[280px]'"
+              class="w-[82vw] max-w-[320px] snap-center flex-shrink-0 transition-transform duration-500 ease-out"
+              :class="index === activeIndex ? 'scale-[1.02]' : 'scale-100 opacity-80'"
             >
               <TestimonialCard
                 v-bind="testimony"
@@ -123,24 +137,19 @@ watch(activeIndex, () => {
           </div>
 
           <!-- Desktop Layout -->
-          <div class="hidden md:grid place-items-center w-full">
-              <div class="grid grid-cols-3 gap-6 place-items-center w-full">
-                <TestimonialCard
-                  v-for="(testimony, index) in testimonies"
-                  :key="index"
-                  v-bind="testimony"
-                  :class="[
-                    'transition-all duration-500 ease-out',
-                    index === activeIndex 
-                      ? 'scale-105 z-20 col-start-2 row-start-1' 
-                      : index === activeIndex - 1
-                      ? 'scale-100 opacity-80 z-10 col-start-1 row-start-1'
-                      : 'scale-100 opacity-80 z-10 col-start-3 row-start-1'
-                  ]"
-                  @click="setActiveIndex(index)"
-                />
-              </div>
+          <div class="relative hidden h-[21rem] w-full overflow-hidden md:block">
+            <div
+              v-for="(testimony, index) in testimonies"
+              :key="index"
+              class="absolute left-1/2 top-8 w-[30%] min-w-[16rem] max-w-[22rem] transition-[transform,opacity] duration-700 ease-in-out"
+              :style="desktopCardStyle(index)"
+            >
+              <TestimonialCard
+                v-bind="testimony"
+                @click="setActiveIndex(index)"
+              />
             </div>
+          </div>
         </div>
 
         <!-- Indicators -->
