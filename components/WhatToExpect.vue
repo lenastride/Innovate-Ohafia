@@ -7,15 +7,15 @@ const obj = {
   activities: [
     {
       name: "Masterclass",
-      image: "/what_to_expect_image_444.png", // Replace with actual image paths
+      image: "/Startup_pitches.jpg", // Replace with actual image paths
     },
     {
       name: "Network",
-      image: "/what_to_expect_image_444.png",
+      image: "/network.jpg",
     },
     {
       name: "Start-up Pitches",
-      image: "/what_to_expect_image_444.png",
+      image: "/Startup_pitches.jpg",
     },
   ],
 };
@@ -80,7 +80,7 @@ onUnmounted(() => {
           <img
             v-for="(activity, index) in obj.activities"
             :key="index"
-            class="w-full flex-shrink-0"
+            class="w-full flex-shrink-0 object-cover"
             :src="activity.image"
             :alt="activity.name"
           />
