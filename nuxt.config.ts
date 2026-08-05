@@ -9,8 +9,11 @@ export default defineNuxtConfig({
     
   },
   runtimeConfig: {
+    flutterwaveSecretKey: '',
+    flutterwaveWebhookHash: '',
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.innovateohafia.com'
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.innovateohafia.com',
+      flutterwavePublicKey: ''
     }
   },
   // Nitro configuration for sitemap

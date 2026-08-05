@@ -73,3 +73,21 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Donations with Flutterwave
+
+The donation experience is available at `/donate`. It uses Flutterwave Standard hosted checkout, which means card and bank details are entered only on Flutterwave's secure payment page.
+
+1. Copy `.env.example` to `.env` locally, then supply the Flutterwave keys as deployment environment variables. Never commit `.env`.
+2. Set `NUXT_PUBLIC_SITE_URL` to the exact public HTTPS URL of the deployed application. Flutterwave redirects donors to `${NUXT_PUBLIC_SITE_URL}/donate/complete` after checkout.
+3. Create a long random `NUXT_FLUTTERWAVE_WEBHOOK_HASH` value and add the same value as the webhook secret hash in the Flutterwave dashboard. Set the webhook URL to:
+
+   ```text
+   https://your-domain.com/api/flutterwave/webhook
+   ```
+
+4. Keep the integration on Flutterwave test keys until the full checkout and callback path has been tested, then replace them with live keys in the hosting provider's environment settings.
+
+The callback page explicitly handles successful, pending, failed, and cancelled payments. The server creates every checkout session, generates the transaction reference, and independently calls Flutterwave's verification endpoint before displaying a successful receipt. The webhook acknowledges pending payments (Flutterwave will notify it again once the payment has a final status), verifies only successful payments, and is protected by the configured `verif-hash` header.
+
+`NUXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY` is retained for a future Flutterwave inline checkout option. This hosted-checkout implementation does not expose or need the secret or encryption key in the browser.
