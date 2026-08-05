@@ -66,10 +66,10 @@ onUnmounted(() => {
       <!-- Header Actions -->
       <section class="header__actions">
         <!-- Get Tickets Link - Desktop Only -->
-        <NuxtLink to="/tickets" class="tickets-link"> Get Tickets </NuxtLink>
+        <!-- <NuxtLink to="/tickets" class="tickets-link"> Get Tickets </NuxtLink> -->
 
         <!-- Donate Button -->
-        <button class="donate-btn">Donate</button>
+        <NuxtLink to="/donate" class="donate-btn">Donate</NuxtLink>
 
         <!-- Mobile Menu Toggle -->
         <button
@@ -165,14 +165,16 @@ onUnmounted(() => {
 
         <!-- Mobile Actions -->
         <div class="mobile-actions">
-          <NuxtLink
+          <!-- <NuxtLink
             to="/tickets"
             class="mobile-tickets-link"
             @click="closeMobileMenu"
           >
             Get Tickets
+          </NuxtLink> -->
+          <NuxtLink to="/donate" class="mobile-donate-btn" @click="closeMobileMenu">
+            Donate
           </NuxtLink>
-          <button class="mobile-donate-btn">Donate</button>
         </div>
       </div>
     </div>
