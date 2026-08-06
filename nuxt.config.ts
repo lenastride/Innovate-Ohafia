@@ -11,6 +11,12 @@ export default defineNuxtConfig({
   runtimeConfig: {
     flutterwaveSecretKey: '',
     flutterwaveWebhookHash: '',
+    supabaseUrl: '',
+    supabaseServiceRoleKey: '',
+    communityMembersTable: 'community_members',
+    resendApiKey: '',
+    communityWelcomeFrom: '',
+    communityWhatsappGroupUrl: '',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.innovateohafia.com',
       flutterwavePublicKey: ''
