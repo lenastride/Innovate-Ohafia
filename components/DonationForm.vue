@@ -12,6 +12,13 @@ const selectAmount = (value: number) => {
 const useCustomAmount = () => {
   selectedAmount.value = null;
 };
+const sanitizePhoneNumber = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  const phoneNumber = input.value.replace(/[^\d+\s()-]/g, '');
+
+  input.value = phoneNumber;
+  form.phoneNumber = phoneNumber.trim();
+};
 const submit = () => beginDonation({ amount: amount.value, ...form });
 </script>
 
@@ -60,12 +67,12 @@ const submit = () => beginDonation({ amount: amount.value, ...form });
     </div>
     <label class="donation-field">
       <span>Phone number <em>(optional)</em></span>
-      <input v-model.trim="form.phoneNumber" id="phoneNumber" maxlength="25" type="tel" autocomplete="tel" class="donation-input" placeholder="+234 800 000 0000" />
+      <input :value="form.phoneNumber" id="phoneNumber" maxlength="25" type="tel" inputmode="tel" autocomplete="tel" pattern="[\d\s+()-]*" class="donation-input" placeholder="+234 800 000 0000" @input="sanitizePhoneNumber" />
     </label>
 
     <p v-if="errorMessage" class="donation-error" role="alert">{{ errorMessage }}</p>
     <button type="submit" class="donation-submit" :disabled="isSubmitting">
-      {{ isSubmitting ? 'Taking you to secure checkout…' : `Donate ${amount && amount >= 100 ? formatNaira(amount) : ''}` }}
+      {{ isSubmitting ? 'Taking you to secure checkout…' : `Donate ${amount && amount >= 1000 ? formatNaira(amount) : ''}` }}
     </button>
     <p class="donation-security">Payments are securely processed by Flutterwave. We do not store your card or bank details.</p>
   </form>

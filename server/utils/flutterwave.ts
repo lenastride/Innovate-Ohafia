@@ -1,5 +1,5 @@
 export const donationCurrency = 'NGN';
-export const minimumDonation = 100;
+export const minimumDonation = 1000;
 
 type FlutterwaveVerification = {
   status: 'success' | string;
