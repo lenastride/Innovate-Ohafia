@@ -80,9 +80,9 @@ const submit = () => beginDonation({ amount: amount.value, ...form });
 
 <style scoped>
 .donation-form { @apply bg-white p-6 sm:p-8 shadow-xl space-y-6; }
-.donation-form__label, .donation-field > span { @apply block font-bold text-[#004873] mb-2; }
+.donation-form__label, .donation-field > span { @apply block font-bold  mb-2; }
 .donation-field em { @apply not-italic font-normal text-slate-500; }
-.donation-amount { @apply border-2 border-slate-200 py-3 font-bold text-[#004873] transition hover:border-[#D90000]; }
+.donation-amount { @apply border-2 border-slate-200 py-3 font-bold  transition hover:border-[#D90000]; }
 .donation-amount--selected { @apply border-[#D90000] bg-red-50 text-[#D90000]; }
 .donation-input { @apply w-full border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-[#D90000] focus:ring-2 focus:ring-red-100; }
 .donation-input--amount { @apply pl-10; }

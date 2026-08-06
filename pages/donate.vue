@@ -40,16 +40,17 @@ useHead({ link: [{ rel: 'canonical', href: 'https://www.innovateohafia.com/donat
 .donation-hero { @apply bg-[#004873] bg-cover bg-center px-5 py-20 text-white md:px-12 md:py-28; background-image: linear-gradient(90deg, rgba(0,72,115,.96), rgba(0,72,115,.72)), url('/hero-background.png'); }
 .donation-hero__content, .donation-grid { @apply mx-auto w-full max-w-6xl; }
 .donation-hero__content { @apply max-w-3xl; }
-.donation-eyebrow { @apply mb-3 font-bold uppercase tracking-[.18em] text-[#ff8383] text-sm; }
+.donation-eyebrow { @apply mb-3 font-bold uppercase tracking-[.18em] text-[#D90000] text-sm; }
 .donation-hero h1 { @apply text-4xl font-bold leading-tight md:text-6xl; }
 .donation-hero h1 span { @apply text-[#ff8383]; }
 .donation-hero p:last-child { @apply mt-5 max-w-2xl text-lg leading-8 text-slate-100; }
 .donation-section { @apply bg-slate-50 px-5 py-16 md:px-12 md:py-24; }
 .donation-grid { @apply grid items-start gap-12 lg:grid-cols-2; }
-.donation-copy h2 { @apply text-3xl font-bold leading-tight text-[#004873] md:text-4xl; }
+.donation-copy h2 { @apply text-3xl font-bold leading-tight  md:text-4xl; }
 .donation-copy > p:not(.donation-eyebrow) { @apply mt-5 max-w-xl leading-8 text-slate-600; }
 .donation-impact { @apply mt-8 space-y-5 border-l-2 border-[#D90000] pl-5; }
 .donation-impact div { @apply flex flex-col; }
-.donation-impact strong { @apply text-lg text-[#004873]; }
+.donation-impact strong { @apply text-lg ; }
 .donation-impact span { @apply mt-1 text-slate-600; }
+/* text-[#004873] */
 </style>
