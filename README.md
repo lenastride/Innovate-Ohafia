@@ -109,4 +109,4 @@ create table public.community_members (
 );
 ```
 
-Then set the `NUXT_SUPABASE_*`, `NUXT_RESEND_API_KEY`, `NUXT_COMMUNITY_WELCOME_FROM`, and `NUXT_COMMUNITY_WHATSAPP_GROUP_URL` values from `.env.example` in your deployment environment. The Supabase service-role key and Resend API key stay server-side; never prefix them with `NUXT_PUBLIC_`.
+Then set the `NUXT_SUPABASE_URL`, `NUXT_SUPABASE_KEY`, `NUXT_RESEND_API_KEY`, `NUXT_COMMUNITY_WELCOME_FROM`, and `NUXT_COMMUNITY_WHATSAPP_GROUP_URL` values from `.env.example` in your deployment environment. They stay server-side; never prefix them with `NUXT_PUBLIC_`. `SUPABASE_URL` and `SUPABASE_KEY` are also accepted for an existing environment-variable setup.
