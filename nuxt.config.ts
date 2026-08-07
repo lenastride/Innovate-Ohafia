@@ -9,17 +9,19 @@ export default defineNuxtConfig({
     
   },
   runtimeConfig: {
-    flutterwaveSecretKey: '',
-    flutterwaveWebhookHash: '',
-    supabaseUrl: '',
-    supabaseServiceRoleKey: '',
-    communityMembersTable: 'community_members',
-    resendApiKey: '',
-    communityWelcomeFrom: '',
-    communityWhatsappGroupUrl: '',
+    flutterwaveSecretKey: process.env.NUXT_FLUTTERWAVE_SECRET_KEY || '',
+    flutterwaveWebhookHash: process.env.NUXT_FLUTTERWAVE_WEBHOOK_HASH || '',
+    // These stay server-only and support both the newer NUXT_* names and the
+    // older unprefixed Supabase names for compatibility.
+    supabaseUrl: process.env.NUXT_SUPABASE_URL || process.env.SUPABASE_URL || '',
+    supabaseKey: process.env.NUXT_SUPABASE_SERVICE_ROLE_KEY || process.env.NUXT_SUPABASE_KEY || process.env.SUPABASE_KEY || '',
+    communityMembersTable: process.env.NUXT_COMMUNITY_MEMBERS_TABLE || 'community_members',
+    resendApiKey: process.env.NUXT_RESEND_API_KEY || '',
+    communityWelcomeFrom: process.env.NUXT_COMMUNITY_WELCOME_FROM || '',
+    communityWhatsappGroupUrl: process.env.NUXT_COMMUNITY_WHATSAPP_GROUP_URL || '',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.innovateohafia.com',
-      flutterwavePublicKey: ''
+      flutterwavePublicKey: process.env.NUXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY || ''
     }
   },
   // Nitro configuration for sitemap
