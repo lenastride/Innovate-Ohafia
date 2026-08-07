@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const from = contactFromEmail || 'Innovate Ohafia <hi@lenastride.com>'
-  const to = contactRecipientEmail || 'hi@lenastride.com'
+  const to = contactRecipientEmail || 'innovateohafia@gmail.com'
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
