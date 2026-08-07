@@ -17,9 +17,12 @@ export default defineNuxtConfig({
     supabaseKey: process.env.NUXT_SUPABASE_SERVICE_ROLE_KEY || process.env.NUXT_SUPABASE_KEY || process.env.SUPABASE_KEY || '',
     communityMembersTable: process.env.NUXT_COMMUNITY_MEMBERS_TABLE || 'community_members',
     resendApiKey: process.env.NUXT_RESEND_API_KEY || '',
+    resendWebhookSecret: process.env.NUXT_RESEND_WEBHOOK_SECRET || process.env.RESEND_WEBHOOK_SECRET || '',
+    resendForwardFromAddress: process.env.NUXT_RESEND_FORWARD_FROM_ADDRESS || 'hi@innovateohafia.com',
+    resendForwardTo: process.env.NUXT_RESEND_FORWARD_TO || 'innovateohafia@gmail.com',
     communityWelcomeFrom: process.env.NUXT_COMMUNITY_WELCOME_FROM || '',
     communityWhatsappGroupUrl: process.env.NUXT_COMMUNITY_WHATSAPP_GROUP_URL || '',
-    contactRecipientEmail: process.env.NUXT_CONTACT_RECIPIENT_EMAIL || 'hi@lenastride.com',
+    contactRecipientEmail: process.env.NUXT_CONTACT_RECIPIENT_EMAIL || 'innovateohafia@gmail.com',
     contactFromEmail: process.env.NUXT_CONTACT_FROM_EMAIL || 'Innovate Ohafia <hi@innovateohafia.com>',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.innovateohafia.com',
