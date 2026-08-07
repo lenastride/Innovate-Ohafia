@@ -7,6 +7,13 @@ type JoinCommunityRequest = {
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[\d\s+()-]+$/;
+const escapeHtml = (value: string) => value.replace(/[&<>'"]/g, (character) => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  "'": '&#39;',
+  '"': '&quot;',
+}[character] as string));
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<JoinCommunityRequest>(event);
@@ -20,26 +27,44 @@ export default defineEventHandler(async (event) => {
   }
 
   const config = useRuntimeConfig();
-  const { supabaseUrl, supabaseServiceRoleKey, communityMembersTable, resendApiKey, communityWelcomeFrom, communityWhatsappGroupUrl } = config;
+  const { supabaseUrl, supabaseKey, communityMembersTable, resendApiKey, communityWelcomeFrom, communityWhatsappGroupUrl } = config;
 
-  if (!supabaseUrl || !supabaseServiceRoleKey || !resendApiKey || !communityWelcomeFrom || !communityWhatsappGroupUrl) {
+  if (!supabaseUrl || !supabaseKey || !resendApiKey || !communityWelcomeFrom || !communityWhatsappGroupUrl) {
     throw createError({ statusCode: 503, statusMessage: 'Community registrations are not configured yet. Please try again later.' });
   }
 
-  const membersUrl = new URL(`/rest/v1/${encodeURIComponent(communityMembersTable)}`, supabaseUrl);
-  membersUrl.searchParams.set('on_conflict', 'email');
-  const memberResponse = await fetch(membersUrl, {
-    method: 'POST',
-    headers: {
-      apikey: supabaseServiceRoleKey,
-      Authorization: `Bearer ${supabaseServiceRoleKey}`,
-      'Content-Type': 'application/json',
-      Prefer: 'resolution=merge-duplicates,return=minimal',
-    },
-    body: JSON.stringify({ first_name: firstName, last_name: lastName, email, phone_number: phoneNumber }),
-  });
+  const possibleTables = Array.from(new Set([communityMembersTable, 'community_members', 'members']));
+  let memberResponse: Response | undefined;
+  let memberErrorBody = '';
+  let lastStatus = 0;
 
-  if (!memberResponse.ok) {
+  for (const tableName of possibleTables) {
+    const membersUrl = new URL(`/rest/v1/${encodeURIComponent(tableName)}`, supabaseUrl);
+    membersUrl.searchParams.set('on_conflict', 'email');
+    memberResponse = await fetch(membersUrl, {
+      method: 'POST',
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        'Content-Type': 'application/json',
+        Prefer: 'resolution=merge-duplicates,return=minimal',
+      },
+      body: JSON.stringify({ first_name: firstName, last_name: lastName, email, phone_number: phoneNumber }),
+    });
+
+    if (memberResponse.ok) {
+      break;
+    }
+
+    lastStatus = memberResponse.status;
+    memberErrorBody = await memberResponse.text();
+    if (memberResponse.status !== 404) {
+      break;
+    }
+  }
+
+  if (!memberResponse?.ok) {
+    console.error('[community-join] failed to save member', lastStatus, memberErrorBody);
     throw createError({ statusCode: 502, statusMessage: 'We could not save your registration. Please try again.' });
   }
 
@@ -51,11 +76,13 @@ export default defineEventHandler(async (event) => {
       to: [email],
       subject: 'Welcome to the Innovate Ohafia community',
       text: `Hello ${firstName},\n\nWelcome to the Innovate Ohafia community! Join our WhatsApp group here: ${communityWhatsappGroupUrl}`,
-      html: `<p>Hello ${firstName},</p><p>Welcome to the Innovate Ohafia community!</p><p><a href="${communityWhatsappGroupUrl}">Join our WhatsApp group</a></p>`,
+      html: `<p>Hello ${escapeHtml(firstName)},</p><p>Welcome to the Innovate Ohafia community!</p><p><a href="${communityWhatsappGroupUrl}">Join our WhatsApp group</a></p>`,
     }),
   });
 
   if (!welcomeResponse.ok) {
+    const welcomeErrorBody = await welcomeResponse.text();
+    console.error('[community-join] failed to send welcome email', welcomeResponse.status, welcomeErrorBody);
     throw createError({ statusCode: 502, statusMessage: 'Your registration was saved, but we could not send the welcome email. Please contact us for the WhatsApp link.' });
   }
 
