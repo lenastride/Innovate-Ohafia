@@ -31,12 +31,7 @@ useHead({
             About Us
           </h1>
           <p class="relative max-w-[30em]">
-            Innovate Ohafia is a transformative initiative designed to ignite a
-            passion for technology, empower youth, and foster economic
-            development in Ohafia. Over five action-packed days, participants
-            will gain valuable tech skills, explore career opportunities, build
-            crucial networks, and collaborate to create sustainable
-            tech-driven communities.
+            Innovate Ohafia is more than a conference—it is the catalyst for a technological revolution in Ohafia. Designed by Lenastride, this initiative begins with an intensive two-day gathering designed to spark innovation, but its impact extends far beyond the event. By equipping youth with future-ready skills, facilitating high-value industry connections, and fostering a culture of collaboration, Innovate Ohafia lays the groundwork for a self-sustaining tech ecosystem. Our goal is to transform Ohafia into a hub where talent is nurtured, businesses are born, and economic prosperity is built for generations to come.
           </p>
         </div>
       </section>
