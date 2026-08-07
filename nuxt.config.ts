@@ -19,6 +19,8 @@ export default defineNuxtConfig({
     resendApiKey: process.env.NUXT_RESEND_API_KEY || '',
     communityWelcomeFrom: process.env.NUXT_COMMUNITY_WELCOME_FROM || '',
     communityWhatsappGroupUrl: process.env.NUXT_COMMUNITY_WHATSAPP_GROUP_URL || '',
+    contactRecipientEmail: process.env.NUXT_CONTACT_RECIPIENT_EMAIL || 'hi@lenastride.com',
+    contactFromEmail: process.env.NUXT_CONTACT_FROM_EMAIL || 'Innovate Ohafia <hi@innovateohafia.com>',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.innovateohafia.com',
       flutterwavePublicKey: process.env.NUXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY || ''
