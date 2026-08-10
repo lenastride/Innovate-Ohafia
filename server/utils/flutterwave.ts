@@ -1,5 +1,24 @@
-export const donationCurrency = 'NGN';
-export const minimumDonation = 1000;
+export type DonationCurrency = 'NGN' | 'USD' | 'EUR' | 'GHS' | 'CAD' | 'ZAR' | 'GBP';
+
+export const supportedDonationCurrencies: DonationCurrency[] = ['NGN', 'USD', 'EUR', 'GHS', 'CAD', 'ZAR', 'GBP'];
+
+export const currencyMinimums: Record<DonationCurrency, number> = {
+  NGN: 1000,
+  USD: 10,
+  EUR: 10,
+  GHS: 50,
+  CAD: 10,
+  ZAR: 100,
+  GBP: 10,
+};
+
+export function getMinimumDonation(currency: DonationCurrency) {
+  return currencyMinimums[currency] ?? 10;
+}
+
+export function isSupportedDonationCurrency(value: string): value is DonationCurrency {
+  return supportedDonationCurrencies.includes(value as DonationCurrency);
+}
 
 type FlutterwaveVerification = {
   status: 'success' | string;
@@ -37,6 +56,7 @@ export function isPendingFlutterwaveStatus(status?: string) {
 export async function createFlutterwavePayment(payload: {
   txRef: string;
   amount: number;
+  currency: DonationCurrency;
   redirectUrl: string;
   customer: { email: string; name: string; phoneNumber?: string };
 }) {
@@ -49,7 +69,7 @@ export async function createFlutterwavePayment(payload: {
       body: {
         tx_ref: payload.txRef,
         amount: payload.amount.toFixed(2),
-        currency: donationCurrency,
+        currency: payload.currency,
         redirect_url: payload.redirectUrl,
         customer: {
           email: payload.customer.email,
@@ -86,8 +106,8 @@ export async function verifyFlutterwaveDonation(transactionId: string, expectedR
     !donation ||
     donation.status !== 'successful' ||
     donation.tx_ref !== expectedReference ||
-    donation.currency !== donationCurrency ||
-    donation.amount < minimumDonation
+    !isSupportedDonationCurrency(donation.currency) ||
+    donation.amount < getMinimumDonation(donation.currency as DonationCurrency)
   ) {
     throw createError({ statusCode: 400, statusMessage: 'This payment could not be verified.' });
   }
