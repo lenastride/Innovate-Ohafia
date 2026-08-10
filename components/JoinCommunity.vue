@@ -42,7 +42,7 @@ const submit = async () => {
 </script>
 
 <template>
-  <section class="mt-5 flex flex-col items-center justify-center gap-4 bg-[url(./hero-background.png)] px-[1em] py-[2em] text-white">
+  <section class="mt-5 flex flex-col items-center justify-center gap-4 bg-[url(/hero-background.png)] px-[1em] py-[2em] text-white">
     <h2 class="text-center text-2xl font-bold">Join the Innovate Ohafia community</h2>
     <button type="button" class="bg-[#D90000] px-4 py-2 font-bold" @click="open">Join the community</button>
   </section>
