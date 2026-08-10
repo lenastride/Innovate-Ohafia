@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { formatCurrency } from '~/composables/useDonation';
 type DonationReceipt = { amount: number; currency: string; reference: string; donor: string };
 const route = useRoute();
 const paymentStatus = computed(() => typeof route.query.status === 'string' ? route.query.status.toLowerCase() : '');
@@ -48,7 +49,7 @@ onMounted(async () => {
         </template>
         <template v-else-if="callbackState === 'successful' && receipt">
           <p class="status-eyebrow">Thank you, {{ receipt.donor }}!</p><h2>Your donation is confirmed.</h2>
-          <p>Your gift of <strong>{{ formatNaira(receipt.amount) }}</strong> will help empower the next generation of innovators in Ohafia.</p>
+          <p>Your gift of <strong>{{ formatCurrency(receipt.amount, receipt.currency) }}</strong> will help empower the next generation of innovators in Ohafia.</p>
           <p class="status-reference">Reference: {{ receipt.reference }}</p>
           <NuxtLink to="/" class="status-button">Return home</NuxtLink>
         </template>
