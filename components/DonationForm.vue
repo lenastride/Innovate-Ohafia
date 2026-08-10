@@ -1,10 +1,32 @@
 <script setup lang="ts">
+import { ref, reactive, computed, watch } from 'vue';
+import {
+  useDonation,
+  donationPresets,
+  donationMinimums,
+  currencySymbols,
+  formatCurrency,
+  supportedDonationCurrencies,
+  getDefaultDonationCurrency,
+  type DonationCurrency,
+} from '~/composables/useDonation';
+
 const { beginDonation, errorMessage, isSubmitting } = useDonation();
-const selectedAmount = ref<number | null>(2500);
+const selectedCurrency = ref<DonationCurrency>(getDefaultDonationCurrency());
+const currencyOptions = supportedDonationCurrencies;
+const selectedAmount = ref<number | null>(donationPresets[selectedCurrency.value][0] ?? null);
 const customAmount = ref('');
 const form = reactive({ name: '', email: '', phoneNumber: '' });
 
 const amount = computed(() => selectedAmount.value ?? Number(customAmount.value));
+const minAmount = computed(() => donationMinimums[selectedCurrency.value]);
+const currencySymbol = computed(() => currencySymbols[selectedCurrency.value]);
+
+watch(selectedCurrency, (currency) => {
+  customAmount.value = '';
+  selectedAmount.value = donationPresets[currency][0] ?? null;
+});
+
 const selectAmount = (value: number) => {
   selectedAmount.value = value;
   customAmount.value = '';
@@ -14,42 +36,52 @@ const useCustomAmount = () => {
 };
 const sanitizePhoneNumber = (event: Event) => {
   const input = event.target as HTMLInputElement;
-  const phoneNumber = input.value.replace(/[^\d+\s()-]/g, '');
+  const phoneNumber = input.value.replace(/[^\d+\s()\-]/g, '');
 
   input.value = phoneNumber;
   form.phoneNumber = phoneNumber.trim();
 };
-const submit = () => beginDonation({ amount: amount.value, ...form });
+const submit = () => beginDonation({ amount: amount.value, ...form }, selectedCurrency.value);
 </script>
 
 <template>
   <form class="donation-form" @submit.prevent="submit">
     <fieldset class="space-y-4">
-      <legend class="donation-form__label">Choose an amount</legend>
-      <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <legend class="donation-form__label">Choose a currency and amount</legend>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="block">
+          <span class="block font-bold mb-2">Currency</span>
+          <select v-model="selectedCurrency" class="donation-input w-full">
+            <option v-for="currency in currencyOptions" :key="currency" :value="currency">
+              {{ currency }}
+            </option>
+          </select>
+        </label>
+      </div>
+      <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <button
-          v-for="preset in donationPresets"
+          v-for="preset in donationPresets[selectedCurrency]"
           :key="preset"
           type="button"
           class="donation-amount"
           :class="{ 'donation-amount--selected': selectedAmount === preset }"
           @click="selectAmount(preset)"
         >
-          {{ formatNaira(preset) }}
+          {{ formatCurrency(preset, selectedCurrency) }}
         </button>
       </div>
-      <label class="block">
-        <span class="sr-only">Custom donation amount in Nigerian naira</span>
-        <span class="donation-input__prefix">₦</span>
+      <label class="block relative">
+        <span class="sr-only">Custom donation amount in selected currency</span>
+        <span class="donation-input__prefix pr-5">{{ currencySymbol }}</span>
         <input
           v-model="customAmount"
           type="number"
-          min="100"
+          :min="minAmount"
           max="10000000"
-          step="100"
+          step="1"
           inputmode="decimal"
-          class="donation-input donation-input--amount"
-          placeholder="Or enter another amount"
+          class="donation-input donation-input--amount pl-5"
+          :placeholder="`...Or enter another amount in ${selectedCurrency}`"
           @focus="useCustomAmount"
         />
       </label>
@@ -72,13 +104,13 @@ const submit = () => beginDonation({ amount: amount.value, ...form });
 
     <p v-if="errorMessage" class="donation-error" role="alert">{{ errorMessage }}</p>
     <button type="submit" class="donation-submit" :disabled="isSubmitting">
-      {{ isSubmitting ? 'Taking you to secure checkout…' : `Donate ${amount && amount >= 1000 ? formatNaira(amount) : ''}` }}
+      {{ isSubmitting ? 'Taking you to secure checkout…' : `Donate ${amount ? formatCurrency(amount, selectedCurrency) : ''}` }}
     </button>
     <p class="donation-security">Payments are securely processed by Flutterwave. We do not store your card or bank details.</p>
   </form>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .donation-form { @apply bg-white p-6 sm:p-8 shadow-xl space-y-6; }
 .donation-form__label, .donation-field > span { @apply block font-bold  mb-2; }
 .donation-field em { @apply not-italic font-normal text-slate-500; }
