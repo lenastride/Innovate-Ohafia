@@ -2,8 +2,8 @@
 const { menuItems } = useNavigation();
 
 const phoneNumber = "+2347065149973";
-const emailAddress = "hi@lenastride.com";
-const ccEmail = "lenastride@gmail.com";
+const emailAddress = "hi@innovateohafia.com";
+const ccEmail = "innovateohafia@gmail.com";
 </script>
 
 <template>
@@ -53,7 +53,7 @@ const ccEmail = "lenastride@gmail.com";
               :href="`mailto:${emailAddress}?cc=${ccEmail}`" target="blank"
               class="hover:underline transition-all duration-200 hover:text-blue-200 cursor-pointer block w-full text-left"
             >
-              hi@lenastride.com
+              hi@innovateohafia.com
             </a>
           </div>
         </div>
