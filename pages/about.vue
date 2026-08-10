@@ -20,7 +20,7 @@ useHead({
 
 <template>
   <header
-    class="h-[90vh] px-[1.5em] md:px-[1em] flex flex-cols justify-center bg-[url(./about_page_mobile_hero.png)] md:bg-[url(./about_page_hero.png)] bg-no-repeat bg-cover bg-position[center bottom] items-center gap-4"
+    class="h-[90vh] px-[1.5em] md:px-[1em] flex flex-cols justify-center bg-[url(/about_page_mobile_hero.png)] md:bg-[url(./about_page_hero.png)] bg-no-repeat bg-cover bg-position[center bottom] items-center gap-4"
   >
     <div class="flex flex-col md:flex-row items-center max-w-[90em] w-full">
       <section class="w-full md:p-[4em] flex justify-center items-center pl-0">
