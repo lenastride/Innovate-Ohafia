@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'Home - Empowering Ohafia Through Technology',
-  description: 'Join Innovate Ohafia in transforming our community through technology education, innovation hubs, and youth empowerment programs.',
-  ogTitle: 'Innovate Ohafia - Home',
-  ogDescription: 'Join Innovate Ohafia in transforming our community through technology education and youth empowerment.',
+  description: 'Igniting youth with a passion for technology and fostering economic development in Ohafia. Join Innovate Ohafia in transforming our community through tech education, innovation hubs, and youth empowerment programs.',
+  ogTitle: 'Innovate Ohafia - Empowering Ohafia Through Technology',
+  ogDescription: 'Igniting youth with a passion for technology and fostering economic development in Ohafia. Join Innovate Ohafia in transforming our community through tech education, innovation hubs, and youth empowerment programs.',
   ogImage: 'https://innovateohafia.com/og-image.png',
   ogUrl: 'https://innovateohafia.com',
   twitterTitle: 'Innovate Ohafia - Home',
