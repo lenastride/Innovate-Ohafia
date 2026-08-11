@@ -1,10 +1,64 @@
+# ===========================================
+# TRADITIONAL SEARCH CRAWLERS
+# ===========================================
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://innovateohafia.com/sitemap.xml
+# ===========================================
+# GOOGLE AI CRAWLERS & CONTROL TOKENS
+# ===========================================
+# Google-Extended: Gemini training & Vertex AI (control token)
+# Note: No HTTP request arrives as Google-Extended; it controls usage of Googlebot-fetched content
+User-agent: Google-Extended
+Allow: /
 
-# Crawl delay (optional)
-# Crawl-delay: 10
+# Google-Agent: Project Mariner (2026)
+User-agent: Google-Agent
+Allow: /
+
+# Google-CloudVertexBot: Vertex AI bot
+User-agent: Google-CloudVertexBot
+Allow: /
+
+# ===========================================
+# OTHER AI SEARCH CRAWLERS
+# ===========================================
+# OpenAI (training, search index, user retrieval)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# ===========================================
+# SITEMAP
+# ===========================================
+Sitemap: https://innovateohafia.com/sitemap.xml
