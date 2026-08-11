@@ -43,7 +43,7 @@ export default defineNuxtConfig({
       title: 'Innovate Ohafia - Igniting Innovation and Empowering Futures',
       meta: [
         { name: 'description', content: 'Igniting youths with a passion for technology and fostering economic development in Ohafia. Join us in transforming our community through innovation.' },
-        { name: 'keywords', content: 'Ohafia, technology, innovation, youth development, economic growth, Nigeria' },
+        { name: 'keywords', content: 'Innovate Ohafia, Ohafia tech, Tech community Ohafia, Youth empowerment Nigeria, Ohafia tech conference, Tech entrepreneurship Nigeria, Youth tech skills Nigeria, Ohafia innovation hub, Digital divide Nigeria, Tech career fair Ohafia, Business pitch contest, Tech mentorship program, How to start a tech business in Ohafia, Tech job opportunities in Ohafia, Entrepreneurship track for tech founders, Networking events for tech professionals Ohafia, Nkporo Unity and Technology Centre, Abia State tech initiatives, Digital training academy, Coding and robotics training, Ohafia, Nigeria, technology, innovation, economic growth, ', },
         { name: 'author', content: 'Innovate Ohafia' },
         { name: 'robots', content: 'index, follow' },
         // Open Graph
