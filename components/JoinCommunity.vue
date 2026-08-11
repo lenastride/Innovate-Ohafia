@@ -2,6 +2,7 @@
 const isOpen = ref(false);
 const isSubmitting = ref(false);
 const errorMessage = ref('');
+const emailNotice = ref('');
 const joined = ref(false);
 const form = reactive({ firstName: '', lastName: '', email: '', phoneNumber: '' });
 
@@ -17,6 +18,7 @@ const open = () => {
   isOpen.value = true;
   joined.value = false;
   errorMessage.value = '';
+  emailNotice.value = '';
 };
 
 const close = () => {
@@ -25,14 +27,19 @@ const close = () => {
 
 const submit = async () => {
   errorMessage.value = '';
+  emailNotice.value = '';
   isSubmitting.value = true;
 
   try {
-    await $fetch('/api/community/join', {
+    const result = await $fetch('/api/community/join', {
       method: 'POST',
       body: form,
     });
+
     joined.value = true;
+    if (result?.emailNotice) {
+      emailNotice.value = result.emailNotice;
+    }
   } catch (error: any) {
     errorMessage.value = error?.data?.statusMessage || 'We are still setting up things. Please try again later.';
   } finally {
@@ -56,6 +63,7 @@ const submit = async () => {
         <template v-if="joined">
           <h2 id="join-community-title" class="pr-8 text-2xl font-bold ">Welcome to the community!</h2>
           <p class="mt-3 leading-6">Please check your email for your welcome message and WhatsApp group link.</p>
+          <p v-if="emailNotice" class="mt-4 rounded border-l-4 border-[#D90000] bg-red-50 px-4 py-3 text-sm text-red-800">{{ emailNotice }}</p>
           <button type="button" class="mt-6 bg-[#D90000] px-5 py-3 font-bold text-white" @click="close">Done</button>
         </template>
 

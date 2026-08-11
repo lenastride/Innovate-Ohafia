@@ -160,8 +160,48 @@ export async function sendDonationThankYouEmail(donation: VerifiedDonation) {
       from,
       to: [email],
       subject: 'Thank you for your donation to Innovate Ohafia',
-      text: `Hello ${donorName},\n\nThank you for your donation of ${amount} to Innovate Ohafia. Your support helps young people in Ohafia access practical technology education, creative spaces, and opportunities.\n\nPayment reference: ${donation.tx_ref}\n\nWith gratitude,\nInnovate Ohafia`,
-      html: `<p>Hello ${escapeHtml(donorName)},</p><p>Thank you for your donation of <strong>${escapeHtml(amount)}</strong> to Innovate Ohafia.</p><p>Your support helps young people in Ohafia access practical technology education, creative spaces, and opportunities.</p><p><strong>Payment reference:</strong> ${escapeHtml(donation.tx_ref)}</p><p>With gratitude,<br>Innovate Ohafia</p>`,
+      text: `Hello ${donorName},\n\nThank you for your donation of ${amount} to Innovate Ohafia. Your support helps young people in Ohafia access practical technology education, creative spaces, and opportunity.\n\nPayment reference: ${donation.tx_ref}\n\nWe appreciate your support.\n\nWith gratitude,\nInnovate Ohafia`,
+      html: `<!doctype html>
+<html lang="en">
+  <body style="margin:0;padding:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#1f2937;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f5f7fb;padding:24px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border-radius:24px;overflow:hidden;box-shadow:0 24px 60px rgba(15,23,42,0.08);">
+            <tr>
+              <td style="background:#004873;padding:32px;text-align:center;color:#ffffff;">
+                <p style="margin:0;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#ff8383;">Donation confirmed</p>
+                <h1 style="margin:16px 0 0;font-size:32px;line-height:1.1;font-weight:700;">Thank you for your support</h1>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:32px 32px 16px;">
+                <p style="margin:0 0 18px;font-size:16px;line-height:1.75;">Hello ${escapeHtml(donorName)},</p>
+                <p style="margin:0 0 18px;font-size:16px;line-height:1.75;">We received your donation of <strong>${escapeHtml(amount)}</strong>. Your gift is helping young people in Ohafia access practical technology education, creative spaces, and a brighter future.</p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 0;background:#f8fafc;border-radius:16px;padding:20px;">
+                  <tr>
+                    <td style="font-size:14px;color:#475569;line-height:1.8;"><strong>Payment reference</strong></td>
+                    <td style="font-size:14px;color:#0f172a;line-height:1.8;text-align:right;">${escapeHtml(donation.tx_ref)}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:14px;color:#475569;line-height:1.8;"><strong>Amount</strong></td>
+                    <td style="font-size:14px;color:#0f172a;line-height:1.8;text-align:right;">${escapeHtml(amount)}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#f8fafc;padding:24px 32px 32px;color:#475569;font-size:14px;line-height:1.75;">
+                <p style="margin:0 0 12px;">If you have any questions about your donation, reply to this email and we’ll be happy to help.</p>
+                <p style="margin:0;">With gratitude,<br><strong>Innovate Ohafia</strong></p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`,
     }),
   });
 
