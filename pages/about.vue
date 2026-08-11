@@ -44,9 +44,9 @@ useHead({
       </section>
     </div>
   </header>
-  <Partners />
+  <!-- <Partners /> -->
   <!-- <Speakers /> -->
-  <Testimonials />
+  <!-- <Testimonials /> -->
   <JoinCommunity />
 </template>
 

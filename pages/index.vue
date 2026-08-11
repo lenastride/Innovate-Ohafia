@@ -25,7 +25,7 @@ useHead({
         <Achievement />
         <WhyAttend />
         <WhatToExpect />
-        <Testimonials />
+        <!-- <Testimonials /> -->
         <JoinCommunity />
     </div>
 </template>
