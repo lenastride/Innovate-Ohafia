@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     // older unprefixed Supabase names for compatibility.
     supabaseUrl: process.env.NUXT_SUPABASE_URL || process.env.SUPABASE_URL || '',
     supabaseKey: process.env.NUXT_SUPABASE_SERVICE_ROLE_KEY || process.env.NUXT_SUPABASE_KEY || process.env.SUPABASE_KEY || '',
-    communityMembersTable: process.env.NUXT_COMMUNITY_MEMBERS_TABLE || 'community_members',
+    communityMembersTable: process.env.NUXT_COMMUNITY_MEMBERS_TABLE || 'members',
     resendApiKey: process.env.NUXT_RESEND_API_KEY || '',
     resendWebhookSecret: process.env.NUXT_RESEND_WEBHOOK_SECRET || process.env.RESEND_WEBHOOK_SECRET || '',
     resendForwardFromAddress: process.env.NUXT_RESEND_FORWARD_FROM_ADDRESS || 'hi@innovateohafia.com',
@@ -52,7 +52,7 @@ export default defineNuxtConfig({
         { property: 'og:description', content: 'Igniting youths with a passion for technology and fostering economic development in Ohafia.' },
         { property: 'og:image', content: 'https://innovateohafia.com/og-image.png' },
         { property: 'og:image:secure_url', content: 'https://innovateohafia.com/og-image.png' },
-        { property: 'og:url', content: 'https://www.innovateohafia.com' },
+        { property: 'og:url', content: 'https://innovateohafia.com' },
         { property: 'og:site_name', content: 'Innovate Ohafia' },
         { property: 'og:image:width', content: '1080' },
         { property: 'og:image:height', content: '1080' },
@@ -72,7 +72,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'manifest', href: '/site.webmanifest' },
-        { rel: 'canonical', href: 'https://www.innovateohafia.com' }
+        { rel: 'canonical', href: 'https://innovateohafia.com' }
       ],
       script: [
         {
