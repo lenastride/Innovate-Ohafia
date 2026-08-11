@@ -1,4 +1,4 @@
-import { isPendingFlutterwaveStatus, verifyFlutterwaveDonation } from '../../utils/flutterwave';
+import { isPendingFlutterwaveStatus, sendDonationThankYouEmail, verifyFlutterwaveDonation } from '../../utils/flutterwave';
 
 type FlutterwaveWebhook = {
   data?: { id?: number | string; tx_ref?: string; status?: string };
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
     return { received: true, status: body.data?.status || 'ignored' };
   }
 
-  await verifyFlutterwaveDonation(transactionId, txRef);
-  // Persist or notify here with an idempotent transaction ID in your production data store.
+  const donation = await verifyFlutterwaveDonation(transactionId, txRef);
+  await sendDonationThankYouEmail(donation);
   return { received: true, status: 'successful' };
 });
