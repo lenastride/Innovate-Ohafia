@@ -1,4 +1,4 @@
-import { verifyFlutterwaveDonation } from '../../utils/flutterwave';
+import { sendDonationThankYouEmail, verifyFlutterwaveDonation } from '../../utils/flutterwave';
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const donation = await verifyFlutterwaveDonation(transactionId, txRef);
+  await sendDonationThankYouEmail(donation);
   return {
     id: donation.id,
     amount: donation.amount,
