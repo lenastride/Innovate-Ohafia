@@ -20,12 +20,13 @@ export default defineNuxtConfig({
     resendWebhookSecret: process.env.NUXT_RESEND_WEBHOOK_SECRET || process.env.RESEND_WEBHOOK_SECRET || '',
     resendForwardFromAddress: process.env.NUXT_RESEND_FORWARD_FROM_ADDRESS || 'hi@innovateohafia.com',
     resendForwardTo: process.env.NUXT_RESEND_FORWARD_TO || 'innovateohafia@gmail.com',
+    donationThankYouFrom: process.env.NUXT_DONATION_THANK_YOU_FROM || '',
     communityWelcomeFrom: process.env.NUXT_COMMUNITY_WELCOME_FROM || '',
     communityWhatsappGroupUrl: process.env.NUXT_COMMUNITY_WHATSAPP_GROUP_URL || '',
     contactRecipientEmail: process.env.NUXT_CONTACT_RECIPIENT_EMAIL || 'innovateohafia@gmail.com',
     contactFromEmail: process.env.NUXT_CONTACT_FROM_EMAIL || 'Innovate Ohafia <hi@innovateohafia.com>',
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.innovateohafia.com',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://innovateohafia.com',
       flutterwavePublicKey: process.env.NUXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY || ''
     }
   },
