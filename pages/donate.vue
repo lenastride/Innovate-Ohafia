@@ -4,7 +4,7 @@ useSeoMeta({
   description: 'Support Innovate Ohafia as we equip young people with technology skills and opportunity.',
   ogTitle: 'Donate to Innovate Ohafia',
   ogDescription: 'Help empower the next generation of innovators in Ohafia.',
-  ogImage: '/og-image.jpg',
+  ogImage: 'https://innovateohafia.com/og-image.png',
 });
 useHead({ link: [{ rel: 'canonical', href: 'https://www.innovateohafia.com/donate' }] });
 </script>
