@@ -17,6 +17,69 @@ const callbackState = computed(() => {
   return 'unconfirmed';
 });
 
+const statusMeta = computed(() => {
+  const defaultDescription = 'Please contact us if you need help confirming your payment.';
+
+  return {
+    verifying: {
+      label: 'Please wait',
+      title: 'Confirming your donation',
+      description: 'We are securely verifying your payment with Flutterwave. This usually takes only a few moments.',
+      buttonLabel: 'Return home',
+      buttonLink: '/',
+      showReference: !!txRef.value,
+    },
+    successful: {
+      label: 'Donation confirmed',
+      title: 'Thank you for your support',
+      description: receipt.value
+        ? `Your gift of ${formatCurrency(receipt.value.amount, receipt.value.currency)} is confirmed and will help empower the next generation of innovators in Ohafia.`
+        : 'Your donation is confirmed. Thank you for supporting practical technology education and opportunity in Ohafia.',
+      buttonLabel: 'Return home',
+      buttonLink: '/',
+      showReference: !!receipt.value?.reference || !!txRef.value,
+    },
+    pending: {
+      label: 'Payment pending',
+      title: 'Your transaction is still processing',
+      description: 'Flutterwave is still finalizing the payment. We will update the status as soon as it is complete.',
+      buttonLabel: 'Return home',
+      buttonLink: '/',
+      showReference: !!txRef.value,
+    },
+    cancelled: {
+      label: 'Donation cancelled',
+      title: 'Your donation was not completed',
+      description: 'No payment was confirmed. You can start again when you are ready.',
+      buttonLabel: 'Try again',
+      buttonLink: '/donate',
+      showReference: false,
+    },
+    failed: {
+      label: 'Payment failed',
+      title: 'Unable to complete your donation',
+      description: 'The payment could not be processed. Please try again or reach out if the issue continues.',
+      buttonLabel: 'Try again',
+      buttonLink: '/donate',
+      showReference: false,
+    },
+    unconfirmed: {
+      label: 'Unconfirmed donation',
+      title: 'We could not verify this payment',
+      description: errorMessage.value || 'No payment was made, or the payment details were unavailable. Please try again when you are ready.',
+      buttonLabel: 'Try again',
+      buttonLink: '/donate',
+      showReference: false,
+    },
+  }[callbackState.value];
+});
+
+const referenceText = computed(() => {
+  if (receipt.value?.reference) return `Reference: ${receipt.value.reference}`;
+  if (txRef.value) return `Reference: ${txRef.value}`;
+  return '';
+});
+
 useSeoMeta({ title: 'Donation status', robots: 'noindex, nofollow' });
 
 onMounted(async () => {
@@ -35,45 +98,26 @@ onMounted(async () => {
   <main class="status-page">
     <section class="status-hero">
       <div class="status-hero__content">
-        <p class="status-hero__eyebrow">Giving back to Ohafia</p>
-        <h1>Donation <span>Status</span></h1>
-        <p>Thank you for supporting practical technology education, creative spaces, and opportunity for young people in Ohafia.</p>
+        <p class="status-hero__eyebrow">Payment status</p>
+        <h1>Donation status</h1>
+        <p>View the current outcome of your payment in one place.</p>
       </div>
     </section>
 
     <section class="status-content">
       <article class="status-card" aria-live="polite">
         <div class="status-card__accent" aria-hidden="true"></div>
-        <template v-if="callbackState === 'verifying'">
-          <p class="status-eyebrow">Please wait</p><h2>Confirming your donation…</h2><p>We are securely verifying the payment with Flutterwave.</p>
-        </template>
-        <template v-else-if="callbackState === 'successful' && receipt">
-          <p class="status-eyebrow">Thank you, {{ receipt.donor }}!</p><h2>Your donation is confirmed.</h2>
-          <p>Your gift of <strong>{{ formatCurrency(receipt.amount, receipt.currency) }}</strong> will help empower the next generation of innovators in Ohafia.</p>
-          <p class="status-reference">Reference: {{ receipt.reference }}</p>
-          <NuxtLink to="/" class="status-button">Return home</NuxtLink>
-        </template>
-        <template v-else-if="callbackState === 'pending'">
-          <p class="status-eyebrow">Donation pending</p><h2>Your payment is still processing.</h2>
-          <p>We will confirm your donation once Flutterwave completes the payment. Please do not make another payment unless the first one fails.</p>
-          <p v-if="txRef" class="status-reference">Reference: {{ txRef }}</p>
-          <NuxtLink to="/" class="status-button">Return home</NuxtLink>
-        </template>
-        <template v-else-if="callbackState === 'cancelled'">
-          <p class="status-eyebrow">Donation cancelled</p><h2>Your donation was cancelled.</h2>
-          <p>No donation has been confirmed. You can safely try again whenever you are ready.</p>
-          <NuxtLink to="/donate" class="status-button">Try again</NuxtLink>
-        </template>
-        <template v-else-if="callbackState === 'failed'">
-          <p class="status-eyebrow">Donation unsuccessful</p><h2>We could not complete your donation.</h2>
-          <p>Please try again or choose another payment method at checkout. You will only be charged for a confirmed donation.</p>
-          <NuxtLink to="/donate" class="status-button">Try again</NuxtLink>
-        </template>
-        <template v-else>
-          <p class="status-eyebrow">Donation not confirmed</p><h2>We could not confirm this donation.</h2>
-          <p>{{ errorMessage || 'No payment was made. You can safely try again when you are ready.' }}</p>
-          <NuxtLink to="/donate" class="status-button">Try again</NuxtLink>
-        </template>
+        <div class="status-card__header">
+          <p class="status-eyebrow">{{ statusMeta.label }}</p>
+          <h2>{{ statusMeta.title }}</h2>
+        </div>
+        <p>{{ statusMeta.description }}</p>
+        <p v-if="receipt && callbackState === 'successful'" class="status-note">Donor: {{ receipt.donor }}</p>
+        <p v-if="statusMeta.showReference && referenceText" class="status-reference">{{ referenceText }}</p>
+        <p v-if="errorMessage && callbackState === 'unconfirmed'" class="status-note">{{ errorMessage }}</p>
+        <div class="status-actions">
+          <NuxtLink :to="statusMeta.buttonLink" class="status-button">{{ statusMeta.buttonLabel }}</NuxtLink>
+        </div>
       </article>
     </section>
   </main>
@@ -89,8 +133,11 @@ onMounted(async () => {
 .status-content { @apply bg-slate-50 px-5 py-16 md:px-12 md:py-24; }
 .status-card { @apply relative mx-auto w-full max-w-3xl bg-white p-8 shadow-xl md:p-14; }
 .status-card__accent { @apply absolute left-0 top-0 h-2 w-full bg-[#D90000]; }
+.status-card__header { @apply space-y-4; }
 .status-card h2 { @apply text-3xl font-bold leading-tight text-[#004873] md:text-4xl; }
-.status-card > p:not(.status-eyebrow):not(.status-reference) { @apply mt-5 max-w-2xl text-lg leading-8 text-slate-600; }
+.status-card > p:not(.status-eyebrow):not(.status-reference):not(.status-note) { @apply mt-5 max-w-2xl text-lg leading-8 text-slate-600; }
+.status-note { @apply mt-4 text-sm text-slate-500; }
 .status-reference { @apply mt-7 break-all border-l-2 border-[#D90000] pl-4 text-sm text-slate-500; }
-.status-button { @apply mt-8 inline-block bg-[#D90000] px-6 py-3 font-bold text-white transition hover:bg-[#b80000] focus:outline-none focus:ring-2 focus:ring-[#D90000] focus:ring-offset-2; }
+.status-actions { @apply mt-8; }
+.status-button { @apply inline-block bg-[#D90000] px-6 py-3 font-bold text-white transition hover:bg-[#b80000] focus:outline-none focus:ring-2 focus:ring-[#D90000] focus:ring-offset-2; }
 </style>
