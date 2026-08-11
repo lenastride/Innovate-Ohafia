@@ -35,6 +35,22 @@ type FlutterwaveVerification = {
 
 export type VerifiedDonation = NonNullable<FlutterwaveVerification['data']>;
 
+const escapeHtml = (value: string) => value.replace(/[&<>'"]/g, (character) => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  "'": '&#39;',
+  '"': '&quot;',
+}[character] as string));
+
+function formatDonationAmount(amount: number, currency: string) {
+  try {
+    return new Intl.NumberFormat('en-NG', { style: 'currency', currency }).format(amount);
+  } catch {
+    return `${currency} ${amount.toFixed(2)}`;
+  }
+}
+
 function getFlutterwaveConfig() {
   const config = useRuntimeConfig();
 
@@ -113,4 +129,43 @@ export async function verifyFlutterwaveDonation(transactionId: string, expectedR
   }
 
   return donation;
+}
+
+/**
+ * Resend honours the idempotency key, so this is safe to call from both the
+ * browser callback and the Flutterwave webhook. Email problems must never
+ * make a confirmed payment appear unsuccessful to the donor.
+ */
+export async function sendDonationThankYouEmail(donation: VerifiedDonation) {
+  const email = donation.customer?.email?.trim().toLowerCase();
+  if (!email) return;
+
+  const config = useRuntimeConfig();
+  const from = config.donationThankYouFrom || config.communityWelcomeFrom || config.contactFromEmail;
+  if (!config.resendApiKey || !from) {
+    console.warn('[donations] thank-you email is not configured');
+    return;
+  }
+
+  const donorName = donation.customer?.name?.trim() || 'Supporter';
+  const amount = formatDonationAmount(donation.amount, donation.currency);
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${config.resendApiKey}`,
+      'Content-Type': 'application/json',
+      'Idempotency-Key': `innovate-ohafia-donation-${donation.id}`,
+    },
+    body: JSON.stringify({
+      from,
+      to: [email],
+      subject: 'Thank you for your donation to Innovate Ohafia',
+      text: `Hello ${donorName},\n\nThank you for your donation of ${amount} to Innovate Ohafia. Your support helps young people in Ohafia access practical technology education, creative spaces, and opportunities.\n\nPayment reference: ${donation.tx_ref}\n\nWith gratitude,\nInnovate Ohafia`,
+      html: `<p>Hello ${escapeHtml(donorName)},</p><p>Thank you for your donation of <strong>${escapeHtml(amount)}</strong> to Innovate Ohafia.</p><p>Your support helps young people in Ohafia access practical technology education, creative spaces, and opportunities.</p><p><strong>Payment reference:</strong> ${escapeHtml(donation.tx_ref)}</p><p>With gratitude,<br>Innovate Ohafia</p>`,
+    }),
+  });
+
+  if (!response.ok) {
+    console.error('[donations] failed to send thank-you email', response.status, await response.text());
+  }
 }
