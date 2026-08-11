@@ -15,7 +15,7 @@
         <WhyAttendCard
           icon="/attend-2.png"
           title="Knowledge and skill enhancement"
-          description="#InnovatOhafia Conferences offer a platform for industry experts to share their knowledge, insights, and best practices. Gaining new knowledge and skills can enhance your professional expertise and help you stay ahead of the curve."
+          description="#InnovateOhafia Conferences offer a platform for industry experts to share their knowledge, insights, and best practices. Gaining new knowledge and skills can enhance your professional expertise and help you stay ahead of the curve."
         />
         <WhyAttendCard
           icon="/attend-3.png"
