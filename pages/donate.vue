@@ -5,8 +5,12 @@ useSeoMeta({
   ogTitle: 'Donate to Innovate Ohafia',
   ogDescription: 'Help empower the next generation of innovators in Ohafia.',
   ogImage: 'https://innovateohafia.com/og-image.png',
+  ogUrl: 'https://innovateohafia.com/donate',
+  twitterTitle: 'Donate to Innovate Ohafia',
+  twitterDescription: 'Help empower the next generation of innovators in Ohafia.',
+  twitterImage: 'https://innovateohafia.com/og-image.png',
 });
-useHead({ link: [{ rel: 'canonical', href: 'https://www.innovateohafia.com/donate' }] });
+useHead({ link: [{ rel: 'canonical', href: 'https://innovateohafia.com/donate' }] });
 </script>
 
 <template>

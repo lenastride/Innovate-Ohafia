@@ -1,19 +1,19 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'Contact - Innovate Ohafia',
-  description: 'Join Innovate Ohafia in transforming our community through technology education, innovation hubs, and youth empowerment programs.',
-  ogTitle: 'Innovate Ohafia - Home',
-  ogDescription: 'Join Innovate Ohafia in transforming our community through technology education and youth empowerment.',
+  description: 'Contact Innovate Ohafia to partner, volunteer, support youth technology education, or learn more about our work in Ohafia.',
+  ogTitle: 'Contact Innovate Ohafia',
+  ogDescription: 'Get in touch to partner, volunteer, support youth technology education, or learn more about Innovate Ohafia.',
   ogImage: 'https://innovateohafia.com/og-image.png',
-  ogUrl: 'https://innovateohafia.com',
-  twitterTitle: 'Innovate Ohafia - Home',
-  twitterDescription: 'Transforming Ohafia through technology and innovation.',
+  ogUrl: 'https://innovateohafia.com/contact',
+  twitterTitle: 'Contact Innovate Ohafia',
+  twitterDescription: 'Get in touch to support youth technology education and innovation in Ohafia.',
   twitterImage: 'https://innovateohafia.com/og-image.png'
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://innovateohafia.com' }
+    { rel: 'canonical', href: 'https://innovateohafia.com/contact' }
   ]
 })
 </script>
