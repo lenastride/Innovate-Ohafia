@@ -81,8 +81,8 @@ export default defineNuxtConfig({
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Innovate Ohafia",
-            "url": "https://www.innovateohafia.com",
-            "logo": "https://www.innovateohafia.com/innovate_ohafia_logo_colored.svg",
+          "url": "https://innovateohafia.com",
+          "logo": "https://innovateohafia.com/innovate_ohafia_logo_colored.svg",
             "description": "Igniting youths with a passion for technology and fostering economic development in Ohafia.",
             "address": {
               "@type": "PostalAddress",

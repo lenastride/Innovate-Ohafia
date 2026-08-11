@@ -9,7 +9,7 @@ export const useSeo = (seoData: {
   const route = useRoute();
   const config = useRuntimeConfig();
   
-  const baseUrl = config.public.siteUrl || 'https://www.innovateohafia.com';
+  const baseUrl = config.public.siteUrl || 'https://innovateohafia.com';
   const fullUrl = `${baseUrl}${route.path}`;
   
   useSeoMeta({

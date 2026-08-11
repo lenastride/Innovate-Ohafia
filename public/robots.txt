@@ -4,7 +4,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://www.innovateohafia.com/sitemap.xml
+Sitemap: https://innovateohafia.com/sitemap.xml
 
 # Crawl delay (optional)
 # Crawl-delay: 10
