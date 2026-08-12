@@ -33,7 +33,7 @@ export const currencySymbols: Record<DonationCurrency, string> = {
 };
 
 export const donationMinimums: Record<DonationCurrency, number> = {
-  NGN: 1000,
+  NGN: 100,
   USD: 10,
   EUR: 10,
   GHS: 50,

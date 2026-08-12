@@ -69,6 +69,14 @@ export function isPendingFlutterwaveStatus(status?: string) {
   return ['pending', 'pending-validation', 'success-pending-validation'].includes(status?.toLowerCase() || '');
 }
 
+export async function fetchFlutterwaveTransaction(transactionId: string) {
+  const config = getFlutterwaveConfig();
+  return $fetch<FlutterwaveVerification>(
+    `https://api.flutterwave.com/v3/transactions/${encodeURIComponent(transactionId)}/verify`,
+    { headers: { Authorization: `Bearer ${config.flutterwaveSecretKey}` } },
+  );
+}
+
 export async function createFlutterwavePayment(payload: {
   txRef: string;
   amount: number;
@@ -117,14 +125,25 @@ export async function verifyFlutterwaveDonation(transactionId: string, expectedR
   );
   const donation = response.data;
 
+  const statusOk = String(response.status || '').toLowerCase() === 'success';
+  const donationStatus = String(donation?.status || '').toLowerCase();
+  const txRefMatches = String(donation?.tx_ref || '').trim() === String(expectedReference || '').trim();
+
   if (
-    response.status !== 'success' ||
+    !statusOk ||
     !donation ||
-    donation.status !== 'successful' ||
-    donation.tx_ref !== expectedReference ||
+    donationStatus !== 'successful' ||
+    !txRefMatches ||
     !isSupportedDonationCurrency(donation.currency) ||
     donation.amount < getMinimumDonation(donation.currency as DonationCurrency)
   ) {
+    console.error('[donations] verification failed', {
+      responseStatus: response.status,
+      donationStatus: donation?.status,
+      donationTxRef: donation?.tx_ref,
+      expectedReference,
+      donation,
+    });
     throw createError({ statusCode: 400, statusMessage: 'This payment could not be verified.' });
   }
 

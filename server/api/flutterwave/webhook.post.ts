@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
   // Pending payments are completed asynchronously. Acknowledging this event avoids
   // unnecessary webhook retries; Flutterwave sends another event when it is final.
   if (isPendingFlutterwaveStatus(body.data?.status)) {
-    return { received: true, status: 'pending' };
+    return { received: true, status: 'pending', message: 'Payment is still processing. Await final webhook event.' };
   }
 
   // Only a successful, independently verified transaction is a confirmed donation.

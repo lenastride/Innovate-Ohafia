@@ -7,9 +7,15 @@ const transactionId = computed(() => typeof route.query.transaction_id === 'stri
 const txRef = computed(() => typeof route.query.tx_ref === 'string' ? route.query.tx_ref : '');
 const receipt = ref<DonationReceipt | null>(null);
 const errorMessage = ref('');
+const verificationState = ref<'idle' | 'pending' | 'successful'>('idle');
 const isVerifying = ref(paymentStatus.value === 'successful' && !!transactionId.value && !!txRef.value);
+const maxPendingRetries = 3;
+const pendingRetryDelayMs = 8000;
+let currentPendingAttempt = 0;
+
 const callbackState = computed(() => {
   if (isVerifying.value) return 'verifying';
+  if (verificationState.value === 'pending') return 'pending';
   if (receipt.value) return 'successful';
   if (paymentStatus.value === 'pending') return 'pending';
   if (['cancelled', 'canceled'].includes(paymentStatus.value)) return 'cancelled';
@@ -82,15 +88,38 @@ const referenceText = computed(() => {
 
 useSeoMeta({ title: 'Donation status', robots: 'noindex, nofollow' });
 
-onMounted(async () => {
-  if (!isVerifying.value) return;
+async function verifyDonation() {
   try {
-    receipt.value = await $fetch<DonationReceipt>('/api/donations/verify', { query: { transaction_id: transactionId.value, tx_ref: txRef.value } });
+    const result = await $fetch<DonationReceipt & { status: 'pending' | 'successful' }>('/api/donations/verify', {
+      query: { transaction_id: transactionId.value, tx_ref: txRef.value },
+    });
+
+    if (result.status === 'pending') {
+      verificationState.value = 'pending';
+      if (currentPendingAttempt < maxPendingRetries) {
+        currentPendingAttempt += 1;
+        setTimeout(verifyDonation, pendingRetryDelayMs);
+      }
+      return;
+    }
+
+    receipt.value = {
+      amount: result.amount,
+      currency: result.currency,
+      reference: result.reference,
+      donor: result.donor,
+    };
+    verificationState.value = 'successful';
   } catch (error: any) {
     errorMessage.value = error?.data?.statusMessage || 'We could not confirm this donation yet. Please contact us with your payment reference.';
   } finally {
     isVerifying.value = false;
   }
+}
+
+onMounted(async () => {
+  if (!isVerifying.value) return;
+  await verifyDonation();
 });
 </script>
 
