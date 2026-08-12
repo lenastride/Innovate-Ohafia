@@ -3,7 +3,7 @@ export type DonationCurrency = 'NGN' | 'USD' | 'EUR' | 'GHS' | 'CAD' | 'ZAR' | '
 export const supportedDonationCurrencies: DonationCurrency[] = ['NGN', 'USD', 'EUR', 'GHS', 'CAD', 'ZAR', 'GBP'];
 
 export const currencyMinimums: Record<DonationCurrency, number> = {
-  NGN: 1000,
+  NGN: 100,
   USD: 10,
   EUR: 10,
   GHS: 50,
