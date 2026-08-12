@@ -8,7 +8,8 @@ const txRef = computed(() => typeof route.query.tx_ref === 'string' ? route.quer
 const receipt = ref<DonationReceipt | null>(null);
 const errorMessage = ref('');
 const verificationState = ref<'idle' | 'pending' | 'successful'>('idle');
-const isVerifying = ref(paymentStatus.value === 'successful' && !!transactionId.value && !!txRef.value);
+const completedStatuses = ['successful', 'completed'];
+const isVerifying = ref(completedStatuses.includes(paymentStatus.value) && !!transactionId.value && !!txRef.value);
 const maxPendingRetries = 3;
 const pendingRetryDelayMs = 8000;
 let currentPendingAttempt = 0;
