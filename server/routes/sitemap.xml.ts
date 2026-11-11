@@ -3,15 +3,15 @@ export default defineEventHandler(async (event) => {
     const baseUrl = config.public.siteUrl;
     
     // Get all your dynamic routes (from CMS, database, etc.)
-    const dynamicRoutes = await $fetch('/api/posts').then(posts => 
-      posts.map(post => `/blog/${post.slug}`)
-    ).catch(() => []);
+    const events = await fetchPublishedEvents().catch(() => []);
+    const dynamicRoutes = events.map(event => `/events/${event.id}`);
   
     // Static routes
     const staticRoutes = [
       '',
       '/about',
       '/contact',
+      '/events',
       '/tickets',
       '/donate'
     ];

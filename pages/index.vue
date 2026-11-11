@@ -22,6 +22,7 @@ useHead({
     <div>
         <Hero />
         <Partners />
+        <EventsSection />
         <Achievement />
         <WhyAttend />
         <WhatToExpect />
