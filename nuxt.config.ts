@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     supabaseUrl: process.env.NUXT_SUPABASE_URL || process.env.SUPABASE_URL || '',
     supabaseKey: process.env.NUXT_SUPABASE_SERVICE_ROLE_KEY || process.env.NUXT_SUPABASE_KEY || process.env.SUPABASE_KEY || '',
     communityMembersTable: process.env.NUXT_COMMUNITY_MEMBERS_TABLE || 'members',
+    keepaliveToken: process.env.NUXT_KEEPALIVE_TOKEN || '',
     resendApiKey: process.env.NUXT_RESEND_API_KEY || '',
     resendWebhookSecret: process.env.NUXT_RESEND_WEBHOOK_SECRET || process.env.RESEND_WEBHOOK_SECRET || '',
     resendForwardFromAddress: process.env.NUXT_RESEND_FORWARD_FROM_ADDRESS || 'hi@innovateohafia.com',

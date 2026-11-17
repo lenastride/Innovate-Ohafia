@@ -110,3 +110,15 @@ create table public.community_members (
 ```
 
 Then set the `NUXT_SUPABASE_URL`, `NUXT_SUPABASE_KEY`, `NUXT_RESEND_API_KEY`, `NUXT_COMMUNITY_WELCOME_FROM`, and `NUXT_COMMUNITY_WHATSAPP_GROUP_URL` values from `.env.example` in your deployment environment. They stay server-side; never prefix them with `NUXT_PUBLIC_`. `SUPABASE_URL` and `SUPABASE_KEY` are also accepted for an existing environment-variable setup.
+
+## Keeping Supabase awake
+
+Supabase Free projects are paused after about 7 days of low database activity, which would break community registrations. `GET /api/keepalive` makes a real read against the members table, using the same server-side Supabase credentials as registration, so it counts as activity. The endpoint is protected by a bearer token.
+
+1. Generate a long random token (for example `openssl rand -hex 32`) and set it as `NUXT_KEEPALIVE_TOKEN` in your hosting environment.
+2. In the GitHub repository, add two Actions secrets: `KEEPALIVE_URL` (for example `https://innovateohafia.com/api/keepalive`) and `KEEPALIVE_TOKEN` (the same token).
+3. `.github/workflows/keepalive.yml` calls the endpoint at 00:17, 08:17, and 16:17 UTC every day. You can also run it manually from the Actions tab to verify the setup.
+
+Check the Actions run log after the first manual trigger; a failing request means the URL, token, or Supabase credentials need attention. If the project is already paused, resume it from the Supabase dashboard first, since a ping cannot wake a paused project. GitHub disables scheduled workflows in public repositories after 60 days without repository activity, so if that applies, point the same URL and token at any external cron service instead.
+
+If your Supabase project is on a paid plan this is unnecessary, because paid projects are never paused for inactivity.
