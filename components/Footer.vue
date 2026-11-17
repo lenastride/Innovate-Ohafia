@@ -138,13 +138,14 @@ const ccEmail = "innovateohafia@gmail.com";
     
     <!-- Footer Bottom -->
     <div
-      class="w-full flex items-center text-sm py-10 pt-5 border-t-2 border-gray-400 justify-between md:max-w-[100em] text-white"
+      class="w-full flex flex-col gap-4 py-8 pt-5 text-sm border-t-2 border-gray-400 md:max-w-[100em] md:flex-row md:items-center md:justify-between text-white"
     >
-      <p class="flex justify-around w-full">
-        <span class="block md:w-full"> © 2024 Innovate Ohafia</span>
-        <a href="#" class="text-white md:w-40 hover:underline">Privacy Policy</a>
-        <a class="text-white md:w-40 hover:underline" href="#">Term of Service</a>
-      </p>
+      <span>© 2024 Innovate Ohafia</span>
+      <nav class="flex flex-wrap items-center gap-x-6 gap-y-2" aria-label="Legal links">
+        <NuxtLink to="/privacy-policy" class="hover:text-blue-200 hover:underline transition-colors duration-200">Privacy Policy</NuxtLink>
+        <NuxtLink to="/terms-of-service" class="hover:text-blue-200 hover:underline transition-colors duration-200">Terms of Service</NuxtLink>
+        <NuxtLink to="/refund-policy" class="hover:text-blue-200 hover:underline transition-colors duration-200">Refund Policy</NuxtLink>
+      </nav>
     </div>
   </footer>
 </template>
